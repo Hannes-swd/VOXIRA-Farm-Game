@@ -1,0 +1,22 @@
+{
+    "enabled": false,
+    "mode": "noise",
+    "seed": 0,
+    "noise_scale": 0.035,
+    "octaves": 4,
+    "persistence": 0.5,
+    "default_tile": "gras",
+    "tex_noise_scale": 0.08,
+    "tex_octaves": 2,
+    "tex_persistence": 0.5,
+    "biomes": [
+        {
+            "name": "welt",
+            "height_min": 0.0,
+            "height_max": 1.0,
+            "tile": "gras",
+            "tiles": [],
+            "objects": []
+        }
+    ]
+}

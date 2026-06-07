@@ -1,0 +1,7 @@
+{
+    "gras": {
+        "name": "gras",
+        "textur": "assets/Images/Map/gras.png",
+        "accessible": true
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "long_brown": {
+        "name": "Long Brown Hair",
+        "spriteFrontal": "Images/clothing/hair/long_brown_frontal.png",
+        "spriteSide": "Images/clothing/hair/long_brown_side.png",
+        "spriteBack": "Images/clothing/hair/long_brown_back.png",
+        "offsetX": 0,
+        "offsetY": 0
+    }
+}

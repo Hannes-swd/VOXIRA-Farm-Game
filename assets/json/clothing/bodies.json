@@ -1,0 +1,9 @@
+{
+    "human_base": {
+        "name": "Human",
+        "spriteFrontal": "Images/clothing/bodies/human_frontal.png",
+        "spriteSide": "Images/clothing/bodies/human_side.png",
+        "offsetX": 0,
+        "offsetY": 0
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "red_shirt": {
+        "name": "Red Shirt",
+        "spriteFrontal": "Images/clothing/shirts/red_frontal.png",
+        "spriteSide": "Images/clothing/shirts/red_side.png",
+        "offsetX": 0,
+        "offsetY": 32
+    }
+}
