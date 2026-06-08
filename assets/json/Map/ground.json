@@ -1,7 +1,18 @@
 {
-    "gras": {
+    "gras1": {
         "name": "gras",
         "textur": "assets/Images/Map/gras.png",
         "accessible": true
+    },
+    "gras2": {
+        "name": "gras",
+        "textur": "assets/Images/Map/gras2.png",
+        "accessible": true
+    },
+    "gras3": {
+        "name": "gras",
+        "textur": "assets/Images/Map/gras3.png",
+        "accessible": true
     }
+
 }

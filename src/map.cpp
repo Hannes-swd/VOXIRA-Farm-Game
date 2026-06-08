@@ -160,7 +160,10 @@ void draw_ground(const Map& world, const GroundDatabase& ground, int tileSize) {
                 const std::string& typ = chunk.tiles[ly][lx];
                 auto it = ground.texturen.find(typ);
                 if (it != ground.texturen.end() && it->second.id != 0) {
-                    DrawTexture(it->second, wx * tileSize, wy * tileSize, WHITE);
+                    DrawTexturePro(it->second,
+                        { 0, 0, (float)it->second.width, (float)it->second.height },
+                        { (float)(wx * tileSize), (float)(wy * tileSize), (float)tileSize, (float)tileSize },
+                        { 0, 0 }, 0.0f, WHITE);
                 } else {
                     DrawRectangle(wx * tileSize, wy * tileSize, tileSize, tileSize, VIOLET);
                 }

@@ -42,6 +42,7 @@ enum class GenMode { None, Noise, Heightmap };
 struct WorldGen {
     // ── Biome-Karte ───────────────────────────────────────────────────────────
     GenMode mode        = GenMode::None;
+    float   hmScale     = 1.0f;
     float   noiseScale  = 0.03f;
     int     octaves     = 4;
     float   persistence = 0.5f;

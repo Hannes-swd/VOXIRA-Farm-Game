@@ -91,7 +91,8 @@ bool WorldGen::load(const std::string& configPath) {
     std::string modeStr = cfg.value("mode", "noise");
     mode = (modeStr == "heightmap") ? GenMode::Heightmap : GenMode::Noise;
 
-    seed        = cfg.value("seed",         0);
+    hmScale     = cfg.value("heightmap_scale", 1.0f);
+    seed        = cfg.value("seed",           0);
     noiseScale  = cfg.value("noise_scale",  0.03f);
     octaves     = cfg.value("octaves",      4);
     persistence = cfg.value("persistence",  0.5f);
@@ -103,7 +104,8 @@ bool WorldGen::load(const std::string& configPath) {
 
     // ── Biome-Heightmap ───────────────────────────────────────────────────────
     if (mode == GenMode::Heightmap) {
-        std::string hmRel = cfg.value("heightmap", "");
+        std::string hmFile = cfg.value("heightmap", "");
+        std::string hmRel  = hmFile.empty() ? "" : "Images/Map/heightmaps/" + hmFile;
         if (hmRel.empty() || !loadHeightmapPNG(hmRel, heightmap, hmWidth, hmHeight)) {
             std::cerr << "[WorldGen] Biome-Heightmap fehlt – Fallback auf Noise." << std::endl;
             mode = GenMode::Noise;
@@ -162,8 +164,8 @@ bool WorldGen::load(const std::string& configPath) {
 
 float WorldGen::getBiomeHeight(int wx, int wy) const {
     if (mode == GenMode::Heightmap && hmWidth > 0) {
-        int px = ((wx % hmWidth)  + hmWidth)  % hmWidth;
-        int py = ((wy % hmHeight) + hmHeight) % hmHeight;
+        int px = ((int)floorf((float)wx / hmScale) % hmWidth  + hmWidth)  % hmWidth;
+        int py = ((int)floorf((float)wy / hmScale) % hmHeight + hmHeight) % hmHeight;
         return heightmap[py * hmWidth + px];
     }
     return fractalNoise((float)wx * noiseScale, (float)wy * noiseScale,
@@ -172,11 +174,16 @@ float WorldGen::getBiomeHeight(int wx, int wy) const {
 
 float WorldGen::getTextureHeight(int wx, int wy) const {
     if (thWidth > 0) {
-        int px = ((wx % thWidth)  + thWidth)  % thWidth;
-        int py = ((wy % thHeight) + thHeight) % thHeight;
+        int px = ((int)floorf((float)wx / hmScale) % thWidth  + thWidth)  % thWidth;
+        int py = ((int)floorf((float)wy / hmScale) % thHeight + thHeight) % thHeight;
         return texHeightmap[py * thWidth + px];
     }
-    // Kein Textur-PNG → anderen Noise-Seed + feinere Skala
+    // Kein separates Textur-PNG → Biome-Heightmap nutzen falls vorhanden
+    if (hmWidth > 0) {
+        int px = ((int)floorf((float)wx / hmScale) % hmWidth  + hmWidth)  % hmWidth;
+        int py = ((int)floorf((float)wy / hmScale) % hmHeight + hmHeight) % hmHeight;
+        return heightmap[py * hmWidth + px];
+    }
     return fractalNoise((float)wx * texNoiseScale, (float)wy * texNoiseScale,
                         seed + 99991, texOctaves, texPersistence);
 }

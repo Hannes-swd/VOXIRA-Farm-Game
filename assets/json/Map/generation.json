@@ -1,7 +1,9 @@
 {
-    "enabled": false,
-    "mode": "noise",
-    "seed": 0,
+    "enabled": true,
+    "mode": "heightmap",
+    "heightmap": "map.png",
+    "heightmap_scale": 10.0,
+    "seed": 10,
     "noise_scale": 0.035,
     "octaves": 4,
     "persistence": 0.5,
@@ -15,8 +17,13 @@
             "height_min": 0.0,
             "height_max": 1.0,
             "tile": "gras",
-            "tiles": [],
+            "tiles": [
+                { "tile": "gras1", "height_min": 0.00, "height_max": 0.35 },
+                { "tile": "gras2",        "height_min": 0.35, "height_max": 0.70 },
+                { "tile": "gras3",   "height_min": 0.70, "height_max": 1.00 }
+            ],
             "objects": []
         }
+        
     ]
 }
